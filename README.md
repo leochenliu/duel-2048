@@ -1,6 +1,6 @@
 # 同题异解 · 2048 双栏对战 (Duel 2048)
 
-![test](https://img.shields.io/badge/test-19%20passing-3fb950?style=flat-square) ![node](https://img.shields.io/badge/node-%E2%89%A520-339933?style=flat-square&logo=node.js) ![zero deps](https://img.shields.io/badge/runtime%20deps-0-9c27b0?style=flat-square) ![cloudflare](https://img.shields.io/badge/deploy-Cloudflare%20Workers-f38020?style=flat-square&logo=cloudflare)
+![test](https://github.com/leochenliu/duel-2048/actions/workflows/test.yml/badge.svg) ![node](https://img.shields.io/badge/node-%E2%89%A520-339933?style=flat-square&logo=node.js) ![zero deps](https://img.shields.io/badge/runtime%20deps-0-9c27b0?style=flat-square) ![cloudflare](https://img.shields.io/badge/deploy-Cloudflare%20Workers-f38020?style=flat-square&logo=cloudflare)
 
 <p align="center">
   <img src="docs/assets/preview.png" alt="同题异解 2048 双栏对战：人类与 Agent 共享事件流并走自己的一步" width="900">
