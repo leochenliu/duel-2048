@@ -1,0 +1,27 @@
+name = "duel-2048"
+main = "worker/index.js"
+compatibility_date = "2025-09-01"
+workers_dev = true
+
+# 静态资源（双栏 UI）由 Worker 直接托管，无需 Pages
+[assets]
+directory = "./public"
+binding = "ASSETS"
+# /api 交给 Worker 处理，其余走静态资源
+run_worker_first = ["/api/*"]
+
+# 每局一个 Durable Object：单一写入者 + 顺序执行 + 状态可恢复
+[[durable_objects.bindings]]
+name = "MATCH"
+class_name = "MatchDO"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["MatchDO"]
+
+[observability]
+enabled = true
+
+# 可选：给生产加一层护栏（免费额度够用）
+# [[limits]]
+# cpu_ms = 200

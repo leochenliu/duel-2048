@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>同题异解 · 2048 双栏对战</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo">◧◨</span>
+    <div>
+      <h1>同题异解 · 2048</h1>
+      <p class="sub">左栏 = 你 &nbsp;|&nbsp; 右栏 = Agent（通过 skills 玩）&nbsp;|&nbsp; 共享事件流 · 过程各自留痕</p>
+    </div>
+  </div>
+  <div class="meta" id="meta"></div>
+  <div class="actions">
+    <input id="seed" placeholder="seed（可留空）" />
+    <select id="sync">
+      <option value="strict">严格同步（值+格）</option>
+      <option value="value">仅同步数值</option>
+      <option value="none">各自独立（经典）</option>
+    </select>
+    <select id="pace">
+      <option value="lock">锁步：AI 跟你的节奏（推荐）</option>
+      <option value="free">自由：AI 自己往前跑</option>
+    </select>
+    <label class="chk"><input type="checkbox" id="forecast" checked /> 事件流可预报</label>
+    <button id="newBtn" class="primary">新开一局</button>
+    <button id="botBtn">AI 上场（右栏）</button>
+    <button id="botHumanBtn">AI 代打（左栏·演示）</button>
+  </div>
+</header>
+
+<main>
+  <!-- 左栏：人类 -->
+  <section class="panel" id="humanPanel">
+    <div class="panel-head">
+      <h2>左栏 · 人类席</h2>
+      <div class="badge" id="humanStatus">playing</div>
+    </div>
+    <div class="board" id="humanBoard"></div>
+    <div class="stats" id="humanStats"></div>
+    <div class="dpad">
+      <button data-dir="up">↑</button>
+      <button data-dir="left">←</button>
+      <button data-dir="down">↓</button>
+      <button data-dir="right">→</button>
+    </div>
+    <form class="note" id="humanNote">
+      <input id="humanNoteText" placeholder="写一句你的想法（回车记录，两边同格式）" />
+      <button>记</button>
+    </form>
+    <div class="process" id="humanProcess"></div>
+  </section>
+
+  <!-- 中栏：共享上下文 -->
+  <section class="panel shared">
+    <div class="panel-head">
+      <h2>共享上下文</h2>
+      <div class="badge" id="overBadge">—</div>
+    </div>
+    <div class="gauge">
+      <div class="gauge-label">节奏锁</div>
+      <div class="gauge-val" id="lockVal">—</div>
+      <div class="gauge-note" id="lockNote">锁步模式：AI 每走一步都必须等你先走</div>
+    </div>
+    <div class="gauge">
+      <div class="gauge-label">分岔点</div>
+      <div class="gauge-val" id="divVal">尚未分岔</div>
+      <div class="gauge-note" id="divNote">两个座位消费同一条事件流；差异只来自决策</div>
+    </div>
+    <div class="gauge cmp">
+      <div class="gauge-label">上一步对照</div>
+      <div class="gauge-val" id="cmpVal">—</div>
+      <div class="gauge-note" id="cmpNote">你走一步 → AI 走一步</div>
+    </div>
+    <div class="forecast" id="forecastBox">
+      <div class="mini-title">下一批事件（两侧相同）</div>
+      <div class="fc-row" id="fcRow"></div>
+    </div>
+    <div class="stream">
+      <div class="mini-title">已消费事件 · 同一事件，两种落点</div>
+      <table id="streamTable">
+        <thead><tr><th>#</th><th>值</th><th>人类落点</th><th>Agent 落点</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="join" id="joinBox"></div>
+  </section>
+
+  <!-- 右栏：Agent -->
+  <section class="panel" id="agentPanel">
+    <div class="panel-head">
+      <h2>右栏 · Agent 席</h2>
+      <div class="badge" id="agentStatus">idle</div>
+    </div>
+    <div class="board" id="agentBoard"></div>
+    <div class="stats" id="agentStats"></div>
+    <div class="trace-head">
+      <span>过程流（工具调用 / 思考）</span>
+      <span class="tiny" id="agentBudget"></span>
+    </div>
+    <div class="process big" id="agentProcess"></div>
+  </section>
+</main>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>
