@@ -1,5 +1,14 @@
 # 同题异解 · 2048 双栏对战 (Duel 2048)
 
+![test](https://img.shields.io/badge/test-19%20passing-3fb950?style=flat-square) ![node](https://img.shields.io/badge/node-%E2%89%A520-339933?style=flat-square&logo=node.js) ![zero deps](https://img.shields.io/badge/runtime%20deps-0-9c27b0?style=flat-square) ![cloudflare](https://img.shields.io/badge/deploy-Cloudflare%20Workers-f38020?style=flat-square&logo=cloudflare)
+
+<p align="center">
+  <img src="docs/assets/preview.png" alt="同题异解 2048 双栏对战：人类与 Agent 共享事件流并走自己的一步" width="900">
+</p>
+<p align="center">
+  <em>左栏 = 你，右栏 = Agent（通过 skills 玩）。同一事件流、不同棋盘、不一样的过程。</em>
+</p>
+
 左栏是你，右栏是用 **agent skills** 玩的 AI。
 **同样的上下文、同样的难题，但过程完全不同。**
 
@@ -35,6 +44,7 @@ npm test                                   # 19 条测试（含 8 条节奏锁�
 node bots/heuristic.js --bench --depth 2    # 离线标定 AI 强度
 npx wrangler dev                           # 用 Workers 运行时本地跑（部署前验证）
 npx wrangler deploy                        # 发布到 Cloudflare（见 docs/DEPLOY.md）
+npm run preview                            # 重新生成 README 预览图（需 Chromium+系统依赖）
 ```
 
 ## 节奏锁（默认开启）

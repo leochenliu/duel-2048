@@ -1,0 +1,23 @@
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: ${{ matrix.node }} }
+      - name: 跑测试（零依赖，直接 node --test）
+        run: npm test
+      - name: 锁步 + 同步 + 工具层测试明细
+        if: success()
+        run: node --test test/*.test.js --test-reporter=tap 2>&1 | tail -25

@@ -4,13 +4,21 @@
   "private": true,
   "type": "module",
   "description": "同题异解 · 双栏对战：人类 vs Agent(skills) 共享上下文与事件流，过程各自独立",
-  "bin": { "g2048": "./cli/g2048.js" },
+  "bin": {
+    "g2048": "./cli/g2048.js"
+  },
   "scripts": {
     "start": "node src/server/server.js",
     "dev": "node --watch src/server/server.js",
     "bot": "node bots/heuristic.js",
     "cli": "node cli/g2048.js",
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "preview": "node scripts/preview.js"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
 }
